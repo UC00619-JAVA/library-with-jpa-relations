@@ -60,4 +60,17 @@ public class Book {
         reviews.add(review);
         review.setBook(this);
     }
+
+    public void removeReview(Review review) {
+        if (this.reviews.contains(review)) {
+            this.removeReview(review);
+        }
+    }
+
+    public void removeReview(Long id) {
+       this.reviews.stream()
+               .filter(review -> review.getId().equals(id))
+               .findFirst()
+               .ifPresent(this::removeReview);
+    }
 }

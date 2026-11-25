@@ -14,8 +14,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByTitleContainingIgnoreCase(String text);
 
     // books + categories in ONE query (solves the N+1)
-    @EntityGraph(attributePaths = "categories")
-    @Query("SELECT b FROM Book b")
+   // @EntityGraph(attributePaths = "categories")
+    @Query("SELECT b FROM Book b INNER JOIN FETCH b.categories")
     List<Book> findAllWithCategories();
 
     // Spring Data follows the relation (automatic JOIN)
